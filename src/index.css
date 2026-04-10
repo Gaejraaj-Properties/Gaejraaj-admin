@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+@theme inline {
+  --color-brand:     #1B3F72;
+  --color-brand-dk:  #142f55;
+  --color-navy:      #0f2044;
+  --color-brand-50:  #EEF3FB;
+  --color-brand-100: #D6E4F7;
+  --color-brand-200: #ADC8EE;
+  --color-gold:      #C8922A;
+  --color-gold-dk:   #a6781e;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background-color: #f4f6fb;
+  color: #0f172a;
+  margin: 0;
+}
+
+/* ── Custom scrollbar ──────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+/* ── Selection ─────────────────────────────────── */
+::selection { background: #D6E4F7; color: #1B3F72; }
+
+/* ── Hide number input spinners ─────────────────── */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ── Animations ────────────────────────────────── */
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.animate-modal-in      { animation: modal-in      0.2s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-in       { animation: fade-in        0.18s ease both; }
+.animate-fade-up       { animation: fade-up        0.28s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-down     { animation: fade-down      0.24s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-slide-in-left { animation: slide-in-left  0.22s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* Stagger delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+
+/* ── Sidebar ───────────────────────────────────── */
+.sidebar-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 10px;
+  font-size: 13.5px; font-weight: 500;
+  transition: background 0.12s, color 0.12s;
+  color: rgba(186, 210, 240, 0.75);
+  text-decoration: none;
+}
+.sidebar-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.sidebar-link.active { background: rgba(27,63,114,0.7); color: #fff; }
