@@ -7,6 +7,7 @@ import DashboardPage from "./pages/DashboardPage";
 import PropertiesPage from "./pages/PropertiesPage";
 import UsersPage from "./pages/UsersPage";
 import InquiriesPage from "./pages/InquiriesPage";
+import LandRecordsPage from "./pages/LandRecordsPage";
 
 function ProtectedRoutes() {
   const { isAuthenticated, loading } = useAuth();
@@ -25,7 +26,8 @@ export default function App() {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/properties" element={<PropertiesPage />} />
             <Route path="/users" element={<UsersPage />} />
-            <Route path="/inquiries" element={<InquiriesPage />} />
+            <Route path="/inquiries"    element={<InquiriesPage />} />
+            <Route path="/land-records" element={<LandRecordsPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

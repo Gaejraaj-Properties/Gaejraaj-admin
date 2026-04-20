@@ -7,6 +7,7 @@ import {
   MessageSquare,
   LogOut,
   ShieldCheck,
+  FileText,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -25,7 +26,8 @@ const NAV_SECTIONS = [
     items: [
       { to: "/properties", icon: Building2, label: "Properties" },
       { to: "/users",      icon: Users,     label: "Users"       },
-      { to: "/inquiries",  icon: MessageSquare, label: "Inquiries" },
+      { to: "/inquiries",    icon: MessageSquare, label: "Inquiries"        },
+      { to: "/land-records", icon: FileText,      label: "Land Records"     },
     ],
   },
 ];
