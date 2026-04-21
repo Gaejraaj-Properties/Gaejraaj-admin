@@ -1,4 +1,4 @@
-import { ElementType, useEffect, useRef, useState } from "react";
+import { type ElementType, useEffect, useRef, useState } from "react";
 
 interface StatCardProps {
   label: string;

@@ -23,9 +23,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import api from "../lib/api";
-import { formatPrice, formatDate } from "../lib/format";
+import { formatPrice } from "../lib/format";
 import StatCard from "../components/ui/StatCard";
-import { SkeletonCard } from "../components/ui/Skeleton";
 import { StatusBadge } from "../components/ui/Badge";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -364,7 +363,7 @@ export default function DashboardPage() {
                     ))}
                   </Pie>
                   <Tooltip
-                    formatter={(v: number) => [v, ""]}
+                    formatter={(v) => [v ?? 0, ""]}
                     contentStyle={{ borderRadius: 10, border: "1px solid #e2e8f0", fontSize: 11, boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
                   />
                 </PieChart>
