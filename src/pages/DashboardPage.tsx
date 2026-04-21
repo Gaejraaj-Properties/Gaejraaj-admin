@@ -53,7 +53,7 @@ interface RecentProperty {
   slug: string;
 }
 
-const PIE_COLORS = ["#1B3F72", "#C8922A", "#2563eb", "#10b981", "#8b5cf6", "#0891b2"];
+const PIE_COLORS = ["#7c3aed", "#06b6d4", "#ec4899", "#10b981", "#f59e0b", "#6366f1"];
 
 const TYPE_CHIP: Record<string, { bg: string; color: string }> = {
   apartment:  { bg: "#eff6ff", color: "#2563eb" },
@@ -86,7 +86,7 @@ function BarTooltip({ active, payload, label }: BarTooltipProps) {
   return (
     <div className="bg-white border shadow-lg rounded-xl px-3.5 py-2.5 text-xs" style={{ borderColor: "#e2e8f0" }}>
       <p className="font-semibold text-gray-700 mb-0.5">{label}</p>
-      <p className="font-bold" style={{ color: "#1B3F72" }}>{payload[0].value} listings</p>
+      <p className="font-bold" style={{ color: "#7c3aed" }}>{payload[0].value} listings</p>
     </div>
   );
 }
@@ -131,48 +131,60 @@ export default function DashboardPage() {
       label: "Total Properties",
       value: loading ? "—" : (stats?.totalProperties ?? 0),
       icon: Building2,
-      accentColor: "#1B3F72",
-      iconBg: "#EEF3FB",
+      accentColor: "#7c3aed",
+      iconBg: "#f5f3ff",
+      gradientFrom: "#7c3aed",
+      gradientTo: "#6366f1",
       sub: loading ? "" : `${stats?.approvedProperties ?? 0} approved`,
     },
     {
       label: "Pending Approval",
       value: loading ? "—" : (stats?.pendingProperties ?? 0),
       icon: Clock,
-      accentColor: "#d97706",
+      accentColor: "#f59e0b",
       iconBg: "#fffbeb",
+      gradientFrom: "#f59e0b",
+      gradientTo: "#ef4444",
       sub: "Awaiting review",
     },
     {
       label: "Total Users",
       value: loading ? "—" : (stats?.totalUsers ?? 0),
       icon: Users,
-      accentColor: "#059669",
+      accentColor: "#10b981",
       iconBg: "#f0fdf4",
+      gradientFrom: "#10b981",
+      gradientTo: "#06b6d4",
       sub: "Registered accounts",
     },
     {
       label: "Inquiries",
       value: loading ? "—" : (stats?.totalInquiries ?? 0),
       icon: MessageSquare,
-      accentColor: "#7c3aed",
-      iconBg: "#f5f3ff",
+      accentColor: "#ec4899",
+      iconBg: "#fdf2f8",
+      gradientFrom: "#ec4899",
+      gradientTo: "#8b5cf6",
       sub: "All time",
     },
     {
       label: "Total Views",
       value: loading ? "—" : (stats?.totalViews?.toLocaleString() ?? 0),
       icon: Eye,
-      accentColor: "#0284c7",
-      iconBg: "#f0f9ff",
+      accentColor: "#06b6d4",
+      iconBg: "#ecfeff",
+      gradientFrom: "#06b6d4",
+      gradientTo: "#6366f1",
       sub: "Across all listings",
     },
     {
       label: "Live Listings",
       value: loading ? "—" : (stats?.approvedProperties ?? 0),
       icon: TrendingUp,
-      accentColor: "#C8922A",
-      iconBg: "#fef9ee",
+      accentColor: "#f59e0b",
+      iconBg: "#fffbeb",
+      gradientFrom: "#f59e0b",
+      gradientTo: "#10b981",
       sub: "Currently active",
     },
   ];
@@ -188,35 +200,39 @@ export default function DashboardPage() {
       {/* ── Welcome Banner ── */}
       <div
         className="relative rounded-2xl overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #0a1929 0%, #0f2044 40%, #1B3F72 100%)" }}
+        style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)" }}
       >
+        {/* Aurora overlay */}
+        <div
+          className="absolute inset-0 animate-aurora opacity-60"
+          style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.4) 0%, rgba(6,182,212,0.25) 40%, rgba(245,158,11,0.15) 70%, rgba(99,102,241,0.3) 100%)" }}
+        />
         {/* Dot grid */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
+          className="absolute inset-0 opacity-[0.05]"
+          style={{ backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)", backgroundSize: "28px 28px" }}
         />
         {/* Glow blobs */}
-        <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-10 blur-3xl" style={{ background: "#C8922A" }} />
-        <div className="absolute -bottom-8 left-1/3 w-40 h-40 rounded-full opacity-10 blur-3xl" style={{ background: "#ADC8EE" }} />
+        <div className="absolute -top-10 -right-10 w-52 h-52 rounded-full blur-3xl animate-glow-pulse"
+          style={{ background: "rgba(99,102,241,0.3)" }} />
+        <div className="absolute -bottom-8 left-1/4 w-44 h-44 rounded-full blur-3xl animate-glow-pulse delay-300"
+          style={{ background: "rgba(6,182,212,0.22)" }} />
 
         <div className="relative px-7 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           {/* Left */}
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-2.5">
               <span
-                className="text-[10px] font-semibold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full"
-                style={{ background: "rgba(200,146,42,0.18)", color: "#e8b96a", border: "1px solid rgba(200,146,42,0.25)" }}
+                className="text-[10px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full"
+                style={{ background: "rgba(99,102,241,0.2)", color: "#a5b4fc", border: "1px solid rgba(99,102,241,0.25)" }}
               >
                 {TODAY}
               </span>
             </div>
-            <h1 className="text-2xl font-extrabold text-white leading-tight tracking-tight">
+            <h1 className="text-[26px] font-black text-white leading-tight tracking-tight">
               {getGreeting()}, {firstName} 👋
             </h1>
-            <p className="text-sm mt-1" style={{ color: "#93b4d9" }}>
+            <p className="text-sm mt-1.5" style={{ color: "#64748b" }}>
               Here's an overview of your real-estate platform.
             </p>
           </div>
@@ -224,16 +240,16 @@ export default function DashboardPage() {
           {/* Right — inline mini stats */}
           <div className="flex items-center gap-3 sm:gap-5 shrink-0 flex-wrap">
             {[
-              { label: "Properties", val: stats?.totalProperties, icon: Building2 },
-              { label: "Users",      val: stats?.totalUsers,      icon: Users },
-              { label: "Inquiries",  val: stats?.totalInquiries,  icon: MessageSquare },
-            ].map(({ label, val, icon: Icon }) => (
+              { label: "Properties", val: stats?.totalProperties, icon: Building2, color: "#a5b4fc" },
+              { label: "Users",      val: stats?.totalUsers,      icon: Users,     color: "#67e8f9" },
+              { label: "Inquiries",  val: stats?.totalInquiries,  icon: MessageSquare, color: "#fcd34d" },
+            ].map(({ label, val, icon: Icon, color }) => (
               <div key={label} className="flex flex-col items-center">
                 <div className="flex items-center gap-1.5">
-                  <Icon style={{ width: 12, height: 12, color: "#ADC8EE" }} />
-                  <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "#5a82b0" }}>{label}</span>
+                  <Icon style={{ width: 11, height: 11, color }} />
+                  <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#475569" }}>{label}</span>
                 </div>
-                <span className="text-xl font-extrabold text-white leading-none mt-0.5">
+                <span className="text-[22px] font-black text-white leading-none mt-0.5">
                   {loading ? "—" : (val ?? 0)}
                 </span>
               </div>
@@ -242,8 +258,8 @@ export default function DashboardPage() {
             {!loading && (stats?.pendingProperties ?? 0) > 0 && (
               <Link
                 to="/properties?status=pending"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-[12.5px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shrink-0"
-                style={{ background: "#C8922A", color: "#fff", boxShadow: "0 4px 14px rgba(200,146,42,0.35)" }}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-[12.5px] font-bold transition-all hover:scale-[1.03] active:scale-[0.97] shrink-0"
+                style={{ background: "linear-gradient(135deg, #f59e0b, #ef4444)", color: "#fff", boxShadow: "0 4px 16px rgba(245,158,11,0.4)" }}
               >
                 <Clock style={{ width: 13, height: 13 }} />
                 {stats!.pendingProperties} pending
@@ -273,7 +289,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="font-bold text-gray-900 text-[13.5px] flex items-center gap-2">
-                <MapPin style={{ width: 13, height: 13, color: "#C8922A" }} />
+                <MapPin style={{ width: 13, height: 13, color: "#f59e0b" }} />
                 Properties by City
               </h2>
               <p className="text-[11px] text-gray-400 mt-0.5 ml-5">Listings across key locations</p>
@@ -289,8 +305,8 @@ export default function DashboardPage() {
               <BarChart data={stats!.cityDistribution} barSize={22} barCategoryGap="30%">
                 <defs>
                   <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#1B3F72" />
-                    <stop offset="100%" stopColor="#2a5ca8" />
+                    <stop offset="0%" stopColor="#6366f1" />
+                    <stop offset="100%" stopColor="#4f46e5" />
                   </linearGradient>
                 </defs>
                 <XAxis
@@ -319,7 +335,7 @@ export default function DashboardPage() {
         >
           <div className="mb-4">
             <h2 className="font-bold text-gray-900 text-[13.5px] flex items-center gap-2">
-              <Building2 style={{ width: 13, height: 13, color: "#C8922A" }} />
+              <Building2 style={{ width: 13, height: 13, color: "#f59e0b" }} />
               By Property Type
             </h2>
             <p className="text-[11px] text-gray-400 mt-0.5 ml-5">Type breakdown</p>
@@ -419,9 +435,9 @@ export default function DashboardPage() {
             <Link
               to="/properties"
               className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors group"
-              style={{ color: "#1B3F72" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#142f55")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#1B3F72")}
+              style={{ color: "#6366f1" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#4f46e5")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#6366f1")}
             >
               View all
               <ArrowRight style={{ width: 12, height: 12 }} className="group-hover:translate-x-0.5 transition-transform" />
@@ -481,7 +497,7 @@ export default function DashboardPage() {
 
                     {/* Price + status */}
                     <div className="flex flex-col items-end gap-1 shrink-0">
-                      <span className="text-[12.5px] font-bold" style={{ color: "#C8922A" }}>
+                      <span className="text-[12.5px] font-bold" style={{ color: "#f59e0b" }}>
                         {formatPrice(p.price)}
                       </span>
                       <StatusBadge status={p.status} />
@@ -491,10 +507,10 @@ export default function DashboardPage() {
                     <Link
                       to={`/properties?search=${encodeURIComponent(p.title)}`}
                       className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors shrink-0"
-                      style={{ background: "#EEF3FB", color: "#1B3F72" }}
+                      style={{ background: "#eef2ff", color: "#6366f1" }}
                       title="Review"
-                      onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.background = "#D6E4F7")}
-                      onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.background = "#EEF3FB")}
+                      onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.background = "#e0e7ff")}
+                      onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.background = "#eef2ff")}
                     >
                       <ArrowRight style={{ width: 12, height: 12 }} />
                     </Link>
@@ -514,7 +530,7 @@ export default function DashboardPage() {
             style={{ borderColor: "#edf2f7", boxShadow: "0 1px 4px rgba(0,0,0,0.05)" }}
           >
             <h2 className="font-bold text-gray-900 text-[13.5px] mb-4 flex items-center gap-2">
-              <MapPin style={{ width: 13, height: 13, color: "#C8922A" }} />
+              <MapPin style={{ width: 13, height: 13, color: "#f59e0b" }} />
               Top Cities
             </h2>
 
@@ -542,7 +558,7 @@ export default function DashboardPage() {
                           className="h-full rounded-full"
                           style={{
                             width: `${pct}%`,
-                            background: i === 0 ? "#1B3F72" : i === 1 ? "#C8922A" : "#ADC8EE",
+                            background: i === 0 ? "#6366f1" : i === 1 ? "#f59e0b" : "#c7d2fe",
                           }}
                         />
                       </div>
@@ -574,8 +590,8 @@ export default function DashboardPage() {
                 label: "All Properties",
                 sub: `${stats?.totalProperties ?? 0} listings`,
                 icon: Building2,
-                bg: "#EEF3FB",
-                color: "#1B3F72",
+                bg: "#eef2ff",
+                color: "#6366f1",
               },
               {
                 to: "/inquiries",
